@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/css/template.css">
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  {% block css %}{% endblock %}
+  {% block script %}{% endblock %}
+  <title>就活報告書管理システム</title>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="logo-content">
+      <a href="#">
+        <h1 class="logo">タイトル</h1>
+      </a>
+    </div>
+    <ul class="sidebar-items">
+      <li class="sidebar-item">
+        <a href="#">
+          <span class="material-icons-outlined">home</span>
+          <span class="sidebar-item-name">ホーム</span>
+        </a>
+        <span class="tooltip">ホーム</span>
+      </li>
+      <li class="sidebar-item">
+        <a href="#">
+          <span class="material-icons-outlined">post_add</span>
+          <span class="sidebar-item-name">報告書作成</span>
+        </a>
+        <span class="tooltip">報告書作成</span>
+      </li>
+      <li class="sidebar-item">
+        <a href="#">
+          <span class="material-icons-outlined">list</span>
+          <span class="sidebar-item-name">報告書一覧</span>
+        </a>
+        <span class="tooltip">報告書一覧</span>
+      </li>
+      <li class="sidebar-item">
+        <a href="#">
+          <span class="material-icons-outlined">person_add</span>
+          <span class="sidebar-item-name">ユーザー追加</span>
+        </a>
+        <span class="tooltip">ユーザー追加</span>
+      </li>
+      <li class="sidebar-item">
+        <a href="#">
+          <span class="material-icons-outlined">logout</span>
+          <span class="sidebar-item-name">ログアウト</span>
+        </a>
+        <span class="tooltip">ログアウト</span>
+      </li>
+    </ul>
+  </nav>
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+</body>
+</html>
