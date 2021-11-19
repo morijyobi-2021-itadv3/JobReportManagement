@@ -1,0 +1,46 @@
+{% extends "template.html" %} 
+
+{% block css %}
+<link rel="stylesheet" href="../static/css/add_user.css">
+{% endblock %}
+
+{% block script %}
+<script src="../static/js/add_user.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+<div class="add-user-container">
+  <h1>ユーザー追加画面</h1>
+  <form action="#" class="form add-user">
+    <div class="form-information">ユーザータイプ</div>
+    <div class="radio-wrapper">
+      <input type="radio" name="user-type" id="student"><label for="student">学生</label>
+    </div>
+    <div class="radio-wrapper">
+      <input type="radio" name="user-type" id="teacher"><label for="teacher">教員</label>
+    </div>
+    <div class="radio-wrapper">
+      <input type="radio" name="user-type" id="employement-helper"><label for="employement-helper">就職課</label>
+    </div>
+
+    <div class="form-information">学科・コース</div>
+    <select name="department" id="depatment-selector">
+      <option value="">情報システム科</option>
+      <option value="">ネットワークセキュリティ科</option>
+      <option value="">総合システム工学科</option>
+      <option value="">高度情報工学科</option>
+    </select>
+    <input type="file" accept="text/csv" id="file-input">
+    <a href="#" class="btn download" download="#">CSVをダウンロード</a>
+    <button type="submit">追加</button>
+    
+  </form>
+
+  <table class="add-user-table">
+    <thead class=""></thead>
+
+  </table>
+  
+</div>
+
+{% endblock %}

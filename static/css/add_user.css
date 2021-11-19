@@ -1,0 +1,25 @@
+.add-user-container {
+  padding: 20px 70px;
+  border: 2px solid #f00;
+}
+
+form.add-user {
+  padding: 20px;
+  border: 2px solid #eee;
+  border-radius: 15px;
+  text-align: left;
+  background: #fff;
+}
+
+form.add-user input[type="radio"]{
+  margin-right: 10px;
+}
+
+.form-information {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+#add-user-table {
+  display:none;
+}
