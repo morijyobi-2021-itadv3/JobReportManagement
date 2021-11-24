@@ -1,10 +1,10 @@
-from flask import Flask,Blueprint, render_template
-from add_user import add_user_bp
-import db
+from flask import Flask, Blueprint, render_template
+from view.teacher import teacher_bp
+from model.db import select_sample
 
 app = Flask(__name__)
 
-app.register_blueprint(add_user_bp)
+app.register_blueprint(teacher_bp)
 
 @app.route("/")
 def top():

@@ -1,6 +1,6 @@
 .add-user-container {
   padding: 20px 70px;
-  border: 2px solid #f00;
+  border: 2px solid #11101d;
 }
 
 form.add-user {
@@ -20,6 +20,20 @@ form.add-user input[type="radio"]{
   margin-bottom: 5px;
 }
 
-#add-user-table {
+.add-user-table {
   display:none;
+  border-collapse: collapse;
+}
+
+.add-user-table th,
+.add-user-table td {
+  padding: 3px 5px;
+}
+
+.add-user-table tr td:nth-child(2),
+.add-user-table tr td:nth-child(3),
+.add-user-table tr td:nth-child(4),
+.add-user-table tr td:nth-child(5),
+.add-user-table tr td:nth-child(7) {
+  text-align: left;
 }
