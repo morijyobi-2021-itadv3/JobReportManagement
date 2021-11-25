@@ -2,7 +2,7 @@ import psycopg2
 
 def select_sample():
     conn = psycopg2.connect(
-        host = '172.21.0.2',
+        host = '172.30.0.100',
         port = 5432,
         user = 'admin',
         database = 'admin',
