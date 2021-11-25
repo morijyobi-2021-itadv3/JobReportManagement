@@ -9,4 +9,11 @@ services:
     environment:
       - FLASK_ENV=development
       - FLASK_APP=app.py
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
     command: flask run --host=0.0.0.0 --debugger --reload
+
+  db:
+    image: postgres:13.5
+    environment: 
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+
