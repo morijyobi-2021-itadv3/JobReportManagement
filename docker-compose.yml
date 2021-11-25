@@ -2,6 +2,9 @@ version: "3.9"
 services:
   app:
     build: .
+    networks:
+      app_net:
+        ipv4_address: 172.30.0.2
     ports:
       - "5000:5000"
     volumes:
@@ -13,6 +16,10 @@ services:
 
   db:
     build: ./postgres
+    networks:
+      app_net:
+        ipv4_address: 172.30.0.100
+
     ports: 
       - '5433:5432'
     restart: always
@@ -20,9 +27,23 @@ services:
       POSTGRES_USER: admin
       POSTGRES_DB: admin
       POSTGRES_PASSWORD: example
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
 
   adminer:
     image: adminer
     restart: always
+    networks:
+      app_net:
+        ipv4_address: 172.30.0.3
     ports:
       - 8080:8080
+
+networks:
+  app_net:
+    name: app_net
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 172.30.0.0/24
