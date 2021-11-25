@@ -10,3 +10,19 @@ services:
       - FLASK_ENV=development
       - FLASK_APP=app.py
     command: flask run --host=0.0.0.0 --debugger --reload
+
+  db:
+    build: ./postgres
+    ports: 
+      - '5433:5432'
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_DB: admin
+      POSTGRES_PASSWORD: example
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
