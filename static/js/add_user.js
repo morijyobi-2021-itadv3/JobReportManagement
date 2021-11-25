@@ -38,14 +38,21 @@ document.addEventListener('DOMContentLoaded',() => {
       return result
     })
 
+    
+
     if(items) {
       table.style.display = 'table'
+      //テーブルヘッダーを追加
       header.map(item => thead_line.innerHTML += `<th>${item}</th>`)
 
       items.map((csvData,index) => {
         tbody.innerHTML += `<tr class="user-data-${index}"></tr>`
         const data_line = document.querySelector(`.user-data-${index}`)
-        check(csvData)
+        let thInnerHtml = ''
+        
+        if(check(csvData).length !== 0) {
+          console.log('Error箇所があります')
+        }
         
         for(const type in csvData){
           data_line.innerHTML += `
@@ -82,11 +89,14 @@ document.addEventListener('DOMContentLoaded',() => {
           checkStudentNumber(datas[type],errorMessages)
           break
         case '氏名':
-          checkName(datas,errorMessages)
+          checkName(datas[type],errorMessages)
+          break
+        case 'メールアドレス':
+          checkMail(datas[type],errorMessages)
+          break
       }
     }
-
-    console.log(errorMessages)
+    return errorMessages
   }
 
   const checkStudentNumber = (number,errorMessages) => {
@@ -98,7 +108,8 @@ document.addEventListener('DOMContentLoaded',() => {
     if(name.length >= 64) errorMessages.push('氏名の文字数が多すぎます')
   }
 
-  const checkMail = (meil,errorMessages) => {
-    const regex = new RegExp(/^$/)
+  const checkMail = (mail,errorMessages) => {
+    const regex = new RegExp(/^[a-z]+\.[a-z]+\.sys[0-9]{2}@morijyobi\.ac\.jp$/)
+    if(!regex.test(mail)) errorMessages.push('メールアドレスが適切ではありません。')
   }
 })
