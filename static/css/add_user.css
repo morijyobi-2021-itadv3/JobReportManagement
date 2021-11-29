@@ -34,6 +34,35 @@ form.add-user input[type="radio"]{
 .add-user-table tr td:nth-child(3),
 .add-user-table tr td:nth-child(4),
 .add-user-table tr td:nth-child(5),
-.add-user-table tr td:nth-child(7) {
+.add-user-table tr td:nth-child(6) {
   text-align: left;
+}
+
+.material-icons-outlined {
+  font-size: 2.5rem;
+  height: 30px;
+  min-width: 30px;
+  line-height: 30px;
+  border-radius: 12px;
+  text-align: center;
+  font-family: 'Material Icons';
+}
+
+.material-icons-outlined.success {
+  color: #28a745;
+}
+.material-icons-outlined.error {
+  color:#dc3545;
+}
+
+.add-user-table td.error {
+  background: #ffd3d7;
+}
+
+.add-user-table caption {
+  margin: 5px 0;
+  padding: 0px 10px;
+  font-size: 2.5rem;
+  text-align: left;
+  border-left: 5px solid #11101d;
 }

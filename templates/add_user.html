@@ -14,13 +14,13 @@
   <form action="#" class="form add-user">
     <div class="form-information">ユーザータイプ</div>
     <div class="radio-wrapper">
-      <input type="radio" name="user-type" id="student" checked><label for="student">学生</label>
+      <input type="radio" name="user-type" id="student" value="学生" checked><label for="student">学生</label>
     </div>
     <div class="radio-wrapper">
-      <input type="radio" name="user-type" id="teacher"><label for="teacher">教員</label>
+      <input type="radio" name="user-type" id="teacher" value="教員" ><label for="teacher">教員</label>
     </div>
     <div class="radio-wrapper">
-      <input type="radio" name="user-type" id="employement-helper"><label for="employement-helper">就職課</label>
+      <input type="radio" name="user-type" id="employement-helper" value="就職課" ><label for="employement-helper">就職課</label>
     </div>
 
     <div class="form-information">学科・コース</div>
@@ -31,13 +31,14 @@
       <option value="総合システム工学科">総合システム工学科</option>
       <option value="高度情報工学科">高度情報工学科</option>
     </select>
-    <div>ファイルを選択する場合は<span>学科コースを選択してください。</span></div>
+    <div>ファイルを選択する場合は学科・コースを選択してください。</div>
     <input type="file" accept="text/csv" id="file-input" disabled="true">
     <a href="#" class="btn download" download="#">CSVをダウンロード</a>
     <button type="submit">追加</button>
   </form>
 
   <table class="add-user-table" border="1">
+    <caption>プレビュー</caption>
     <thead>
       <tr></tr>
     </thead>
