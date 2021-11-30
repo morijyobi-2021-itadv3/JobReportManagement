@@ -24,9 +24,9 @@ services:
       - '5433:5432'
     restart: always
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_DB: admin
-      POSTGRES_PASSWORD: example
+      POSTGRES_USER: $PSQL_DB_DOCKER_USER
+      POSTGRES_DB: $PSQL_DB_DOCKER_DATABASE
+      POSTGRES_PASSWORD: $PSQL_DB_DOCKER_PASSWORD
     volumes:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
 
