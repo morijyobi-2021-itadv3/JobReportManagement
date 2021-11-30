@@ -1,12 +1,13 @@
 import psycopg2
+import os
 
 def select_sample():
     conn = psycopg2.connect(
-        host = '172.30.0.100',
-        port = 5432,
-        user = 'admin',
-        database = 'admin',
-        password = 'example'
+        host = os.environ.get('PSQL_DB_DOCKER_HOST'),
+        port = os.environ.get('PSQL_DB_DOCKER_PORT'),
+        user = os.environ.get('PSQL_DB_DOCKER_USER'),
+        database = os.environ.get('PSQL_DB_DOCKER_DATABASE'),
+        password = os.environ.get('PSQL_DB_DOCKER_PASSWORD')
     )
 
     cur = conn.cursor()

@@ -2,9 +2,6 @@ version: "3.9"
 services:
   app:
     build: .
-    networks:
-      app_net:
-        ipv4_address: 172.30.0.2
     ports:
       - "5000:5000"
     volumes:
@@ -12,14 +9,17 @@ services:
     environment:
       - FLASK_ENV=development
       - FLASK_APP=app.py
+      - PSQL_DB_DOCKER_PORT=$PSQL_DB_DOCKER_PORT
+      - PSQL_DB_DOCKER_HOST=$PSQL_DB_DOCKER_HOST
+      - PSQL_DB_DOCKER_DATABASE=$PSQL_DB_DOCKER_DATABASE
+      - PSQL_DB_DOCKER_USER=$PSQL_DB_DOCKER_USER
+      - PSQL_DB_DOCKER_PASSWORD=$PSQL_DB_DOCKER_PASSWORD
+
     command: flask run --host=0.0.0.0 --debugger --reload
 
   db:
     build: ./postgres
-    networks:
-      app_net:
-        ipv4_address: 172.30.0.100
-
+    hostname: 'db'
     ports: 
       - '5433:5432'
     restart: always
@@ -33,17 +33,6 @@ services:
   adminer:
     image: adminer
     restart: always
-    networks:
-      app_net:
-        ipv4_address: 172.30.0.3
     ports:
       - 8080:8080
-
-networks:
-  app_net:
-    name: app_net
-    driver: bridge
-    ipam:
-     driver: default
-     config:
-       - subnet: 172.30.0.0/24
+      
