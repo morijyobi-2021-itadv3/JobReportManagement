@@ -2,4 +2,9 @@
 
 {% block content %}
 <h1>This is Login Page</h1>
+<ul>
+{% for d in data %}
+  <li>{{ d[0] }} : {{ d[1] }}</li>
+{% endfor %}
+</ul>
 {% endblock %}
