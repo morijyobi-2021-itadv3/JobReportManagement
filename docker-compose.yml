@@ -6,7 +6,6 @@ services:
       - "5000:5000"
     volumes:
       - ./:/app
-    environment:
-      - FLASK_ENV=development
-      - FLASK_APP=app.py
+    env_file:
+      - .env
     command: flask run --host=0.0.0.0 --debugger --reload
