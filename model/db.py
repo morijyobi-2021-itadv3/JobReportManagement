@@ -1,12 +1,13 @@
 import psycopg2
+import os
 
 def select_sample():
     conn = psycopg2.connect(
-        host = '',
-        port = 5432,
-        user = '',
-        database = '',
-        password = ''
+        host = os.environ.get('POSTGRES_HOST'),
+        port = os.environ.get('POSTGRES_PORT'),
+        user = os.environ.get('POSTGRES_USER'),
+        database = os.environ.get('POSTGRES_DB'),
+        password = os.environ.get('POSTGRES_PASSWORD')
     )
 
     cur = conn.cursor()
