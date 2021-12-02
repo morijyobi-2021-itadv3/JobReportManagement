@@ -10,7 +10,7 @@ services:
       - .env
     command: flask run --host=0.0.0.0 --debugger --reload
   db:
-    image: postgres:13-alpine
+    image: postgres:13
     volumes:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     env_file:
