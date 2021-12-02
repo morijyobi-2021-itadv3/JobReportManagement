@@ -10,3 +10,15 @@ services:
       - FLASK_ENV=development
       - FLASK_APP=app.py
     command: flask run --host=0.0.0.0 --debugger --reload
+
+  db:
+    image: "postgres:13"
+    restart: always
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_DB: admin
+      POSTGRES_PASSWORD: example
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
