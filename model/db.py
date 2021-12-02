@@ -2,15 +2,15 @@ import psycopg2
 
 def select_sample():
     conn = psycopg2.connect(
-        host = '',
+        host = 'db',
         port = 5432,
-        user = '',
-        database = '',
-        password = ''
+        user = 'admin',
+        database = 'admin',
+        password = 'example'
     )
 
     cur = conn.cursor()
-    cur.execute('SELECT * FROM sample;')
+    cur.execute('SELECT * FROM users;')
     results = cur.fetchall()
 
     cur.close()
