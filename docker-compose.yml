@@ -9,11 +9,15 @@ services:
     environment:
       - FLASK_ENV=development
       - FLASK_APP=app.py
-      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
     command: flask run --host=0.0.0.0 --debugger --reload
 
   db:
     image: postgres:13.5
+    ports:
+      - "5433:5432"
     environment: 
-      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-
+      - POSTGRES_DB=sample
+      - POSTGRES_USER=jrm_tora
+      - POSTGRES_PASSWORD=jrm_tora_pass
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d

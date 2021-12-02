@@ -2,4 +2,9 @@
 
 {% block content %}
 <h1>This is Login Page</h1>
+<ul>
+  {% for data in datas %}
+    <li>{{data[0]}} says "{{data[1]}}!"</li>
+  {% endfor %}
+</ul>
 {% endblock %}
