@@ -1,7 +1,10 @@
 from flask import Flask, render_template
+from view.student import student
 from model.db import select_sample
 
 app = Flask(__name__)
+
+app.register_blueprint(student)
 
 @app.route("/")
 def top():
