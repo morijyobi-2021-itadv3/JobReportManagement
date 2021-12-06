@@ -10,17 +10,38 @@ document.addEventListener('DOMContentLoaded',() => {
 
   let selected_user = user_type_radioBtn[0].value
 
+  console.log('セレクトボックス',selectbox.value)
+
   user_type_radioBtn.forEach(item => {
     item.addEventListener('change',() => {
       if(item.checked) selected_user = item.value
-      console.log(selected_user)
+
+      if(selected_user === '学生') {
+        selectbox.removeAttribute('disabled')
+        file_input.setAttribute('disabled',true)
+        if(selectbox.value === '学科・コースを選択') {
+          selectbox.removeAttribute('disabled')
+        }else{
+          file_input.removeAttribute('disabled')
+        }
+      }else {
+        selectbox.setAttribute('disabled',true)
+        file_input.removeAttribute('disabled')
+      }
+      
+      // if(selected_user === '学生' && selectbox.value === '学科・コースを選択') {
+      //   console.log('check')
+      //   selectbox.removeAttribute('disabled')
+      //   file_input.setAttribute('disabled',true)
+      // } else {
+      //   selectbox.setAttribute('disabled',true)
+      //   file_input.removeAttribute('disabled')
+      // }
     })
   })
 
-  console.log(selected_user)
-
   selectbox.addEventListener('change', () => {
-    if(selectbox.value === '学科・コースを選択'){
+    if(selected_user === '学生' && selectbox.value === '学科・コースを選択'){
       file_input.setAttribute('disabled',true)
     }else {
       file_input.removeAttribute('disabled')
@@ -49,8 +70,6 @@ document.addEventListener('DOMContentLoaded',() => {
       return result
     })
 
-    
-
     if(items) {
       table.style.display = 'table'
       thead_line.innerHTML = `<th></th>`
@@ -61,7 +80,6 @@ document.addEventListener('DOMContentLoaded',() => {
         const data_line = document.querySelector(`.user-data-${index}`)
         let checkTdHtml = ''
         allCheck = true
-        //createElement,appendChildを使う方法
 
         for(const type in csvData){
           let td = document.createElement('td')
@@ -182,7 +200,7 @@ document.addEventListener('DOMContentLoaded',() => {
     if(!regex.test(mail)) errorMessages.push('メールアドレスが適切ではありません。')
   }
 
-  const checkStudentNumberTest = number => new RegExp(/^[0-9]{６}$/).test(number)
+  const checkStudentNumberTest = number => new RegExp(/^[0-9]{7}$/).test(number)
 
   const checkNameTest = name => name.length <= 64
 
