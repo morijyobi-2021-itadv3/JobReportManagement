@@ -28,10 +28,3 @@ services:
       POSTGRES_PASSWORD: $PSQL_DB_DOCKER_PASSWORD
     volumes:
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
-      
