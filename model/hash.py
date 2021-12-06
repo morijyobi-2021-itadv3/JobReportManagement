@@ -2,11 +2,14 @@ import hashlib
 import string
 import secrets
 
+#constant args
+STRETCH = 100 #ストレッチ回数
+
 def sha256_text(text,salt):
    """与えられた文字列をSHA-256に変換する
 
    Args:
-       text (string): パスワードの平文
+       text (string): ハッシュ化したい文字
        salt (string): ソルト
 
    Returns:
@@ -16,6 +19,10 @@ def sha256_text(text,salt):
    
    """
    hash = hashlib.sha256(text+salt).hexdigest()
+
+    #ストレッチ
+   for i in range(STRETCH):
+       hash = hashlib.sha256(hash).hexdigest()
 
    return hash
 
@@ -32,8 +39,3 @@ def generate_hash(length):
    letters = string.ascii_letters
    result_str = ''.join(secrets.choice(letters) for i in range(length))
    return result_str
-
-
-
-
-
