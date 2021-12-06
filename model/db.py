@@ -1,12 +1,14 @@
 import psycopg2
+import os
+
 
 def select_sample():
     conn = psycopg2.connect(
-        host = 'db',
-        port = 5432,
-        user = 'jrm_tora',
-        database = 'sample',
-        password = 'jrm_tora_pass'
+        host = os.environ.get('POSTGRES_HOST'),
+        port = os.environ.get('POSTGRES_PORT'),
+        user = os.environ.get('POSTGRES_USER'),
+        database = os.environ.get('POSTGRES_DATABASE'),
+        password = os.environ.get('POSTGRES_PASSWORD')
     )
 
     cur = conn.cursor()
