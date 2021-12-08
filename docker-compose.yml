@@ -22,7 +22,6 @@ services:
     hostname: 'db'
     ports: 
       - '5433:5432'
-    restart: always
     environment:
       POSTGRES_USER: $PSQL_DB_DOCKER_USER
       POSTGRES_DB: $PSQL_DB_DOCKER_DATABASE
