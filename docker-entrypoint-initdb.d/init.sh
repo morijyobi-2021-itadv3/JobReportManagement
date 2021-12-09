@@ -1,5 +1,5 @@
 set -e
-psql -U admin << EOSQL
+psql -U admin -d test << EOSQL
 CREATE TABLE data(
    txt varchar(100) PRIMARY KEY
    );
