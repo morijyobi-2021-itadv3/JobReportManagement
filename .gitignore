@@ -131,3 +131,4 @@ dmypy.json
 #other
 tmpdockerfile
 uwsgi.ini
+.idea/
