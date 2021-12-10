@@ -2,10 +2,8 @@ import hashlib
 import string
 import secrets
 
-#constant args
-STRETCH = 100 #ストレッチ回数
 
-def sha256_text(text,salt):
+def sha256_text(text, salt):
    """与えられた文字列をSHA-256に変換する
 
    Args:
@@ -14,17 +12,23 @@ def sha256_text(text,salt):
 
    Returns:
        string: 変換後の文字列(16進数)
+       textが空の時は　None
 
    ソルトが存在しない場合、textのみでハッシュ値を生成する。
-   
+
    """
-   hash = hashlib.sha256(text+salt).hexdigest()
+   if salt is None:
+      salt = ''
 
-    #ストレッチ
-   for i in range(STRETCH):
-       hash = hashlib.sha256(hash).hexdigest()
+   try:
+      output = hashlib.pbkdf2_hmac("sha256", bytes(text, 'utf-8'), bytes(salt, 'utf-8'), 5290).hex()
 
-   return hash
+   except NameError:
+      print('textが空です。')
+      return None
+
+   return output
+
 
 def generate_hash(length):
    """ランダムで安全な文字列を暗号学的に作成する
