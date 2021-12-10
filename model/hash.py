@@ -30,7 +30,7 @@ def sha256_text(text, salt):
    return output
 
 
-def generate_hash(length):
+def generate_random_alpa(length):
    """ランダムで安全な文字列を暗号学的に作成する
 
    Args:
