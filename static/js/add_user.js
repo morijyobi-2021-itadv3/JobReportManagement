@@ -8,15 +8,14 @@ document.addEventListener('DOMContentLoaded',() => {
   const user_type_radioBtn = document.getElementsByName('user-type')
   const fileReader = new FileReader()
 
-  let selected_user = user_type_radioBtn[0].value
-
-  console.log('セレクトボックス',selectbox.value)
+  let user_type = user_type_radioBtn[0].value
+  let selected_value = selectbox.value
 
   user_type_radioBtn.forEach(item => {
     item.addEventListener('change',() => {
-      if(item.checked) selected_user = item.value
+      if(item.checked) user_type = item.value
 
-      if(selected_user === '学生') {
+      if(user_type === '学生') {
         selectbox.removeAttribute('disabled')
         file_input.setAttribute('disabled',true)
         if(selectbox.value === '学科・コースを選択') {
@@ -28,20 +27,12 @@ document.addEventListener('DOMContentLoaded',() => {
         selectbox.setAttribute('disabled',true)
         file_input.removeAttribute('disabled')
       }
-      
-      // if(selected_user === '学生' && selectbox.value === '学科・コースを選択') {
-      //   console.log('check')
-      //   selectbox.removeAttribute('disabled')
-      //   file_input.setAttribute('disabled',true)
-      // } else {
-      //   selectbox.setAttribute('disabled',true)
-      //   file_input.removeAttribute('disabled')
-      // }
     })
   })
 
   selectbox.addEventListener('change', () => {
-    if(selected_user === '学生' && selectbox.value === '学科・コースを選択'){
+    selected_value = selectbox.value
+    if(user_type === '学生' && selectbox.value === '学科・コースを選択'){
       file_input.setAttribute('disabled',true)
     }else {
       file_input.removeAttribute('disabled')
@@ -71,15 +62,33 @@ document.addEventListener('DOMContentLoaded',() => {
     })
 
     if(items) {
+
+      
       table.style.display = 'table'
       thead_line.innerHTML = `<th></th>`
       header.map(item => thead_line.innerHTML += `<th>${item}</th>`)
+
+      if(user_type === '学生'){
+        const second_th = document.querySelector('thead tr th:nth-child(3)')
+        second_th.insertAdjacentHTML('afterend','<th>学科コース</th>')
+      }
       
+      //二次元配列からテーブルを作成
       items.map((csvData,index) => {
         tbody.innerHTML += `<tr class="user-data-${index}"></tr>`
         const data_line = document.querySelector(`.user-data-${index}`)
         let checkTdHtml = ''
         allCheck = true
+
+        //プレビューとしては
+        /*
+        学籍番号、氏名、学科コース、メアド、卒業年次、担任名
+        を表示させたい
+        プログラム側で追加するのは
+        セレクトボックスで選ばれた学科コース
+        と
+        メールアドレスから取得する担任名
+        */
 
         for(const type in csvData){
           let td = document.createElement('td')
@@ -90,6 +99,11 @@ document.addEventListener('DOMContentLoaded',() => {
 
           td.innerText = csvData[type]
           data_line.appendChild(td)
+        }
+
+        if(user_type === '学生') {
+          const second_td = document.querySelector(`.user-data-${index} td:nth-child(2)`)
+          second_td.insertAdjacentHTML('afterend',`<td>${selected_value}</td>`)
         }
 
         checkTdHtml = allCheck ? 
