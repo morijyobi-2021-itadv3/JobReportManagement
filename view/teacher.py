@@ -5,7 +5,7 @@ from model.db import select_sample
 teacher_bp = Blueprint('teacher',__name__, url_prefix='/teacher')
 
 @teacher_bp.route('/add_user',methods=['GET','POST'])
-def send_first_page():
+def add_user():
   if(request.method == 'GET'):
     # 学科コース名を取得する
     departments = select_sample()
@@ -15,9 +15,6 @@ def send_first_page():
     csvdata = request.files.get('csv')
     user_type = request.form.get('user-type')
     department = request.form.get('department')
-
-    print(user_type)
-    print(department)
     
     # 取得したCSVデータを二次元配列に格納
     csvDataMatrix = [[data.strip() for data in row.decode(encoding='shift-jis').split(',')] for row in csvdata]
