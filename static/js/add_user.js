@@ -145,9 +145,10 @@ document.addEventListener('DOMContentLoaded',() => {
     }
   })
 
-  //submitする際にdisabledにした要素の情報が送れないのでsubmitする前にdisabled属性を取り除く
+  //submitする際にdisabledにした要素の情報が送れないので,submitする前にdisabled属性を取り除く処理
   form.addEventListener('submit',() => {
     file_input.removeAttribute('disabled')
+    selectbox.removeAttribute('disabled')
     user_type_radioBtn.forEach(el => {
       el.removeAttribute('disabled')
     })
