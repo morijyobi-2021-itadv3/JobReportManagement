@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded',() => {
           second_td.insertAdjacentHTML('afterend',`<td>${selected_value}</td>`)
         }
 
+        //プレビュー時の成功マークか失敗マークかを判断
         checkTdHtml = lineDataCheck ? 
         `
         <td>
@@ -178,11 +179,15 @@ document.addEventListener('DOMContentLoaded',() => {
     return check
   }
 
+  //学籍番号の正規表現チェック
   const checkStudentNumber = number => new RegExp(/^[0-9]{7}$/).test(number)
 
+  //学生氏名の文字数チェック
   const checkName = name => name.length <= 64
 
+  //メールアドレス(学生用)の正規表現チェック
   const checkMailStu = mail => new RegExp(/^[a-z]+\.[a-z]+\.sys[0-9]{2}@morijyobi\.ac\.jp$/).test(mail)
 
+  //メールアドレス(教員、就職課用)の正規表現チェック
   const checkMailTea = mail => new RegExp(/^[a-z]+\.[a-z]+@morijyobi\.ac\.jp$/).test(mail)
 })
