@@ -1,0 +1,11 @@
+.env
+.env.sample
+.git
+.gitignore
+.idea/
+Dockerfile
+docker-compose.yml
+docker-entrypoint-initdb.d/
+README.md
+Procfile
+__pycache__/

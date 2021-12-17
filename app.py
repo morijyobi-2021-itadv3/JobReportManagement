@@ -1,6 +1,6 @@
 from flask import Flask, Blueprint, render_template
 from view.teacher import teacher_bp
-from model.db import select_sample
+from model.db import get_connection
 
 app = Flask(__name__)
 
