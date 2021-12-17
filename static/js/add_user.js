@@ -164,7 +164,11 @@ document.addEventListener('DOMContentLoaded',() => {
         check = checkName(data)
         break
       case 'メールアドレス':
-        check = checkMail(data)
+        if(user_type === '学生'){
+          check = checkMailStu(data)
+        }else{
+          check = checkMailTea(data)
+        }
         break
       default:
         check = true
@@ -178,5 +182,7 @@ document.addEventListener('DOMContentLoaded',() => {
 
   const checkName = name => name.length <= 64
 
-  const checkMail = mail => new RegExp(/^[a-z]+\.[a-z]+\.sys[0-9]{2}@morijyobi\.ac\.jp$/).test(mail)
+  const checkMailStu = mail => new RegExp(/^[a-z]+\.[a-z]+\.sys[0-9]{2}@morijyobi\.ac\.jp$/).test(mail)
+
+  const checkMailTea = mail => new RegExp(/^[a-z]+\.[a-z]+@morijyobi\.ac\.jp$/).test(mail)
 })
