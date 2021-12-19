@@ -2,18 +2,21 @@ from model.db import get_connection
 
 conn = get_connection()
 
-def insert_new_user():
+def insert_new_user(name,mail,user_type):
   """
   新しいユーザーの追加
     Args:
-      object: 追加するデータ
+      name(string): ユーザーの名前
+      mail(string):ユーザーのメールアドレス
+      user_type(int): ユーザータイプ
     Returns:
       bool: 成功したかどうか
   """
 
+  sql = 'INSERT INTO users (name,mail,is_newuser,user_type,created_at) VALUES (%s,%s,TRUE,%s,current_timestamp(0))'
+
   cur = conn.cursor()
-  cur.execute('INSERT INTO users (name,mail,is_newuser,user_type,created_at) values("test","test@morijyobi.ac.jp",TRUE,0,current_timestamp(0)')
-  results = cur.fetchall()
+  results = cur.execute(sql,[name,mail,user_type])
 
   cur.close()
   conn.close()
@@ -29,7 +32,7 @@ def get_latest_user_id():
       int: 取得したID
   """
 
-  sql = 'SELECT max(id) FROM user;'
+  sql = 'SELECT MAX(id) FROM user;'
 
   cur = conn.cursor()
   cur.execute(sql)
