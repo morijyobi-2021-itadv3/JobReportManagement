@@ -5,8 +5,6 @@ import os
 
 def get_connection():
     """DBのコネクションを返すメソッド
-    Args:
-        なし
     Returns:
         成功時:Connection
         失敗時:None
@@ -26,7 +24,6 @@ def get_connection():
         host=url.hostname,
         port=url.port
     )
-        
         return conn
     except KeyError:
         print("環境変数の設定がされていません")
