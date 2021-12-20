@@ -2,10 +2,12 @@ from model.db import get_connection
 
 conn = get_connection()
 
-def insert_new_user(name,mail,user_type):
+def insert_new_user(password,salt,name,mail,user_type):
   """
   新しいユーザーの追加
     Args:
+      password(string): ハッシュ化されたパスワード
+      salt(string): ランダムに生成されたソルト
       name(string): ユーザーの名前
       mail(string):ユーザーのメールアドレス
       user_type(int): ユーザータイプ
@@ -13,10 +15,10 @@ def insert_new_user(name,mail,user_type):
       bool: 成功したかどうか
   """
 
-  sql = 'INSERT INTO users (name,mail,is_newuser,user_type,created_at) VALUES (%s,%s,TRUE,%s,current_timestamp(0))'
+  sql = 'INSERT INTO users (mail, password, salt, name, is_newuser, user_type) VALUES (%s,%s,%s,%s,TRUE,%s)'
 
   cur = conn.cursor()
-  results = cur.execute(sql,[name,mail,user_type])
+  results = cur.execute(sql,[mail,password,salt,name,user_type])
 
   cur.close()
   conn.close()
@@ -32,11 +34,13 @@ def get_latest_user_id():
       int: 取得したID
   """
 
-  sql = 'SELECT MAX(id) FROM user;'
+  sql = 'SELECT MAX(id) FROM user WHERE user_type = 0;'
 
   cur = conn.cursor()
   cur.execute(sql)
-  results = cur.fetchone() 
+  id = cur.fetchone() 
 
   cur.close()
   conn.close()
+
+  return id
