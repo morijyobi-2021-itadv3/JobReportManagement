@@ -1,7 +1,5 @@
 from model.db import get_connection
 
-conn = get_connection()
-
 def insert_new_student(user_id,graduation_year,student_number,department_id,teacher_id):
   """
   新しいユーザーの追加
@@ -14,10 +12,14 @@ def insert_new_student(user_id,graduation_year,student_number,department_id,teac
     Returns:
       bool: 成功したかどうか
   """
+
+  conn = get_connection()
+  
   sql = 'INSERT INTO students VALUES (%s,%s,%s,%s,%s);'
 
   cur = conn.cursor()
   results = cur.execute(sql,[user_id,graduation_year,student_number,department_id,teacher_id])
+  conn.commit()
 
   cur.close()
   conn.close()

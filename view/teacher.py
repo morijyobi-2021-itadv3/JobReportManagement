@@ -1,9 +1,11 @@
 from flask import Flask, Blueprint, render_template, request
 import csv
 import io
-from model.departments import get_departments_visible
-from model.user import insert_new_user
-from model.user import get_latest_user_id
+from model.departments import get_departments_visible,get_departmentId_with_name
+from model.users import insert_new_user,get_latest_user_id,get_userId_with_mail
+from model.students import insert_new_student
+from model.hash import sha256_text,generate_random_alpha
+
 teacher_bp = Blueprint('teacher',__name__, url_prefix='/teacher')
 
 @teacher_bp.route('/add_user',methods=['GET','POST'])
@@ -17,6 +19,7 @@ def add_user():
     csvdata = request.files.get('csv')
     user_type = request.form.get('user-type')
     department = request.form.get('department')
+    department_id = get_departmentId_with_name(department)
     user_type_number = None
 
     if(user_type == '学生'):
@@ -43,29 +46,36 @@ def add_user():
         dataObj.setdefault(header[index],row[index])
       dictionaryArray.append(dataObj)
 
-    add_new_users(dictionaryArray,user_type_number,department)
+    add_new_users(dictionaryArray,user_type_number,department_id)
 
     return render_template('index.html')
 
-def add_new_users(dictionaryArray,user_type_number,department):
+def add_new_users(dictionaryArray,user_type_number,department_id):
   """
   新しいUsersデータを追加
   Args: 
     matrix(array): 追加したいcsvデータの二次元配列
     user_type_number: 追加するユーザータイプの数字
-    department: 学科名
+    department_id: 学科ID
   Returns:
     bool: 成功したかどうか
   """
 
   # 1行ずつデータを追加
   for userData in dictionaryArray:
-    insert_new_user(userData['氏名'],userData['メールアドレス'],user_type_number)
-    # ユーザータイプが「学生」の時の処理
+    password = generate_random_alpha(10)
+    salt = generate_random_alpha(5)
+    hashedPassword = sha256_text(password,salt)
+    
+    insert_new_user(hashedPassword,salt,userData['氏名'],userData['メールアドレス'],user_type_number)
+    # 学生のデータを追加
     if(user_type_number == 0):
       # 最新のユーザーIDを取得
       id = get_latest_user_id()
+
+      # 担任IDを取得
+      teacher_id = get_userId_with_mail(userData['担任名'])
       
       #studentテーブルにデータを追加する処理
-
+      insert_new_student(id,userData['卒業年度'],userData['学籍番号'],department_id,teacher_id)
 
