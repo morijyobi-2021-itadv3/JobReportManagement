@@ -10,9 +10,9 @@
 
 {% block content %}
 <div class="add-user-container">
-  <h1>ユーザー追加画面</h1>
+  <h1 class="title">ユーザー追加画面</h1>
   <form action="{{url_for('teacher.add_user')}}" class="form add-user" method="post" enctype="multipart/form-data">
-    <div class="form-information">ユーザータイプ</div>
+    <div class="form-title">ユーザータイプ</div>
     <div class="radio-wrapper">
       <input type="radio" name="user-type" id="student" value="学生" checked><label for="student">学生</label>
     </div>
@@ -23,21 +23,26 @@
       <input type="radio" name="user-type" id="employement-helper" value="就職課" ><label for="employement-helper">就職課</label>
     </div>
 
-    <div class="form-information">学科・コース</div>
+    <div class="form-title">学科・コース</div>
     <select name="department" id="department-selector">
       <option value="学科・コースを選択" selected>学科・コースを選択</option>
       {% for department in departments %}
         <option value="{{department[1]}}">{{department[1]}}</option>
       {% endfor %}
     </select>
-    <div>ファイルを選択する場合は学科・コースを選択してください。</div>
-    <input type="file" accept="text/csv" id="file-input" name="csv" disabled="true">
-    <p><a href="#" class="btn download" download="#">テンプレートCSVをダウンロード(学生用)</a></p>
-    <p><a href="#" class="btn download" download="#">テンプレートCSVをダウンロード(教員・就職課用)</a></p>
-    <button type="submit" class="btn submit" disabled>追加</button>
+    <p class="note">ファイルを選択する場合は学科・コースを選択してください。</p>
+    <label for="file-input" class="file-input-label">
+      <input type="file" accept="text/csv" id="file-input" name="csv" disabled="true">ファイルを選択
+    </label>
+    <div class="download-group">
+      <p class="note">CSVダウンロードはこちらから</p>
+      <a href="#" download="#"><span class="btn download">学生用CSV</span></a>
+      <a href="#" download="#"><span class="btn download">教員・就職課用CSV</span></a>
+    </div>
+    <button type="submit" class="btn submit" disabled>ユーザを追加する</button>
   </form>
 
-  <table class="add-user-table" border="1">
+  <table class="add-user-table">
     <caption>プレビュー</caption>
     <thead>
       <tr></tr>
