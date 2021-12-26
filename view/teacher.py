@@ -5,6 +5,7 @@ from model.departments import get_departments_visible,get_departmentId_with_name
 from model.users import insert_new_user,get_latest_user_id,get_userId_with_mail
 from model.students import insert_new_student
 from model.hash import sha256_text,generate_random_alpha
+from model.mail import send_mail
 
 teacher_bp = Blueprint('teacher',__name__, url_prefix='/teacher')
 
@@ -68,6 +69,11 @@ def add_new_users(dictionaryArray,user_type_number,department_id):
     hashedPassword = sha256_text(password,salt)
     
     insert_new_user(hashedPassword,salt,userData['氏名'],userData['メールアドレス'],user_type_number)
+
+    #　登録されたメールアドレス宛に、ランダムに生成したパスワード(仮)を送信する
+    # 誤送信を防ぐためにコメントアウトしておく
+    # send_mail(userData['メールアドレス'],password)
+    
     # 学生のデータを追加
     if(user_type_number == 0):
       # 最新のユーザーIDを取得
@@ -76,6 +82,6 @@ def add_new_users(dictionaryArray,user_type_number,department_id):
       # 担任IDを取得
       teacher_id = get_userId_with_mail(userData['担任名'])
       
-      #studentテーブルにデータを追加する処理
+      #　studentテーブルにデータを追加する処理
       insert_new_student(id,userData['卒業年度'],userData['学籍番号'],department_id,teacher_id)
 
