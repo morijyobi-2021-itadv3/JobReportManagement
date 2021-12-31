@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
-RUN export $SECRET_KEY=`cat /dev/urandom | base64 | fold -w 32 | head -n 1`
+ENV SECRET_KEY `cat /dev/urandom | base64 | fold -w 32 | head -n 1`
 
 COPY . .
 
