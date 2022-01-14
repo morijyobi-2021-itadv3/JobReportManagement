@@ -84,6 +84,8 @@ document.addEventListener('DOMContentLoaded',() => {
       return result
     })
 
+    console.log(items)
+
     if(items) {
       table.style.display = 'table'
       thead_line.innerHTML = `<th></th>`
@@ -165,11 +167,7 @@ document.addEventListener('DOMContentLoaded',() => {
         check = checkName(data)
         break
       case 'メールアドレス':
-        if(user_type === '学生'){
-          check = checkMailStu(data)
-        }else{
-          check = checkMailTea(data)
-        }
+        check = checkMail(data)
         break
       default:
         check = true
@@ -185,9 +183,6 @@ document.addEventListener('DOMContentLoaded',() => {
   //学生氏名の文字数チェック
   const checkName = name => name.length <= 64
 
-  //メールアドレス(学生用)の正規表現チェック
-  const checkMailStu = mail => new RegExp(/^[a-z]+\.[a-z]+\.sys[0-9]{2}@morijyobi\.ac\.jp$/).test(mail)
-
-  //メールアドレス(教員、就職課用)の正規表現チェック
-  const checkMailTea = mail => new RegExp(/^[a-z]+\.[a-z]+@morijyobi\.ac\.jp$/).test(mail)
+  //メールアドレスの正規表現チェック
+  const checkMail = mail => new RegExp(/^[a-zA-Z0-9].*@morijyobi\.ac\.jp$/).test(mail)
 })
