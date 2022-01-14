@@ -1,8 +1,8 @@
-from flask import Flask, Blueprint, render_template, request
-import csv
-import io
+from types import resolve_bases
+from flask import Flask, Blueprint, render_template, request, redirect, jsonify
+import csv, io
 from model.departments import get_departments_visible,get_departmentId_with_name
-from model.users import insert_new_user,get_latest_user_id,get_userId_with_mail
+from model.users import get_teacher_info, insert_new_user,get_latest_user_id,get_userId_with_mail
 from model.students import insert_new_student
 from model.hash import sha256_text,generate_random_alpha
 from model.mail import send_mail
@@ -85,3 +85,18 @@ def add_new_users(dictionaryArray,user_type_number,department_id):
       #　studentテーブルにデータを追加する処理
       insert_new_student(id,userData['卒業年度'],userData['学籍番号'],department_id,teacher_id)
 
+@teacher_bp.route('/add_user/api/teacher_info',methods=['GET'])
+def get_teacher_info_api():
+
+  # 教員の名前とメールのデータを取得する
+  teacher_info_array = get_teacher_info()
+
+  # オブジェクトにする
+  teacher_info_obj = {}
+  for data in teacher_info_array:
+    teacher_info_obj[data[0]] = data[1]
+  
+  # オブジェクトをJSONに変換する
+  result_json = jsonify(teacher_info_obj)
+
+  return result_json

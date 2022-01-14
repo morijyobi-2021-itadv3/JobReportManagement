@@ -76,7 +76,7 @@ def get_teacher_info():
     Args: 
       なし
     Returns: 
-      Array: 教員情報の配列
+      Array: 教員情報の配列(メール,名前)
   """
 
   conn = get_connection()
@@ -86,8 +86,6 @@ def get_teacher_info():
   cur = conn.cursor()
   cur.execute(sql)
   result = cur.fetchall()
-
-  print(result)
 
   cur.close()
   conn.close()
