@@ -5,6 +5,7 @@ from model.db import get_connection
 app = Flask(__name__)
 
 app.register_blueprint(teacher_bp)
+app.config['JSON_AS_ASCII'] = False
 
 @app.route("/")
 def top():
