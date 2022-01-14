@@ -140,8 +140,6 @@ document.addEventListener('DOMContentLoaded',() => {
         data_line.insertAdjacentHTML('afterbegin',checkTdHtml)
       })
 
-      console.log(submitButton)
-
       if(!allCheck.includes(false)){
         submitButton.removeAttribute('disabled')
       }

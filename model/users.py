@@ -69,3 +69,27 @@ def get_userId_with_mail(mail):
   conn.close()
 
   return id
+
+def get_teacher_info():
+  """
+  教員情報を取得
+    Args: 
+      なし
+    Returns: 
+      Array: 教員情報の配列
+  """
+
+  conn = get_connection()
+
+  sql = 'SELECT mail,name from users WHERE user_type = 1 ORDER BY id'
+
+  cur = conn.cursor()
+  cur.execute(sql)
+  result = cur.fetchall()
+
+  print(result)
+
+  cur.close()
+  conn.close()
+
+  return result
