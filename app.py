@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from view.student import student
-from model.db import select_sample
+from model.db import get_connection
 
 app = Flask(__name__)
 
