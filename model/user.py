@@ -1,5 +1,6 @@
 import datetime
 
+
 from model.db import get_connection
 from model.hash import generate_random_alpha, sha256_text
 
@@ -41,7 +42,6 @@ def get_token(mail):
        Returns:
            string: 64文字の大文字小文字含む英数字
            mailが空の時は　None
-
     """
 
     conn = db.connect_sql()
