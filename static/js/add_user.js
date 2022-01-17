@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded',() => {
+document.addEventListener('DOMContentLoaded',async() => {
   const file_input = document.querySelector('#file-input')
   const table = document.querySelector('.add-user-table')
   const thead = document.querySelector('.add-user-table thead')
@@ -12,6 +12,14 @@ document.addEventListener('DOMContentLoaded',() => {
 
   let user_type = user_type_radioBtn[0].value
   let selected_value = selectbox.value
+  
+
+  const getJsonData = async() => {
+    return await fetch('add_user/api/teacher_info')
+    .then(response => response.json())
+  }
+  
+  const teacher_mail_name = await getJsonData()
 
   user_type_radioBtn.forEach(item => {
     item.addEventListener('change',() => {
@@ -57,7 +65,9 @@ document.addEventListener('DOMContentLoaded',() => {
     file_input.setAttribute('disabled',true)
 
     const file_result = fileReader.result.split('\r\n')
-    const header = file_result[0].split(',')
+    let header = file_result[0].split(',')
+    header[header.length-1] = '担任名'
+    
     file_result.shift()
 
     // CSVから情報を取得し二次元配列を生成
@@ -83,8 +93,6 @@ document.addEventListener('DOMContentLoaded',() => {
       }
       return result
     })
-
-    console.log(items)
 
     if(items) {
       table.style.display = 'table'
@@ -112,7 +120,13 @@ document.addEventListener('DOMContentLoaded',() => {
             td.classList.add('error')
           }
 
-          td.innerText = csvData[type]
+          // 教員のメールアドレスから名前を紐づける
+          if(type === '担任名' && teacher_mail_name[csvData[type]]) {
+            td.innerText = teacher_mail_name[csvData[type]]
+          }else{
+            td.innerText = csvData[type]
+          }
+
           data_line.appendChild(td)
         }
 
@@ -176,11 +190,11 @@ document.addEventListener('DOMContentLoaded',() => {
   }
 
   //学籍番号の正規表現チェック
-  const checkStudentNumber = number => new RegExp(/^[0-9]{7}$/).test(number)
+  const checkStudentNumber = number => number && new RegExp(/^[0-9]{7}$/).test(number)
 
   //学生氏名の文字数チェック
-  const checkName = name => name.length <= 64
+  const checkName = name => name && name.length <= 64
 
   //メールアドレスの正規表現チェック
-  const checkMail = mail => new RegExp(/^[a-zA-Z0-9].*@morijyobi\.ac\.jp$/).test(mail)
+  const checkMail = mail => mail && new RegExp(/^[a-zA-Z0-9].*@morijyobi\.ac\.jp$/).test(mail)
 })
