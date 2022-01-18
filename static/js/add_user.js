@@ -181,6 +181,9 @@ document.addEventListener('DOMContentLoaded',async() => {
       case 'メールアドレス':
         check = checkMail(data)
         break
+      case '担任名':
+        check = checkFromMail(data)
+        break
       default:
         check = true
         break
@@ -192,9 +195,12 @@ document.addEventListener('DOMContentLoaded',async() => {
   //学籍番号の正規表現チェック
   const checkStudentNumber = number => number && new RegExp(/^[0-9]{7}$/).test(number)
 
-  //学生氏名の文字数チェック
+  //氏名の文字数チェック
   const checkName = name => name && name.length <= 64
 
   //メールアドレスの正規表現チェック
   const checkMail = mail => mail && new RegExp(/^[a-zA-Z0-9].*@morijyobi\.ac\.jp$/).test(mail)
+
+  //メールアドレスに対する教員が存在するか
+  const checkFromMail = mail => mail && mail in teacher_mail_name
 })
