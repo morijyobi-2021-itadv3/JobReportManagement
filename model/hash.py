@@ -3,7 +3,7 @@ import string
 import secrets
 
 
-def sha256_text(text, salt):
+def sha256_text(text, salt=""):
     """与えられた文字列をSHA-256に変換する
 
    Args:
