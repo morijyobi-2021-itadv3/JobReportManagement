@@ -199,8 +199,8 @@ document.addEventListener('DOMContentLoaded',async() => {
   const checkName = name => name && name.length <= 64
 
   //メールアドレスの正規表現チェック
-  const checkMail = mail => mail && new RegExp(/^[a-zA-Z0-9].*@morijyobi\.ac\.jp$/).test(mail)
+  const checkMail = mail => mail && mail.length <= 256 && new RegExp(/^[a-zA-Z0-9].*@morijyobi\.ac\.jp$/).test(mail)
 
   //メールアドレスに対する教員が存在するか
-  const checkFromMail = mail => mail && mail in teacher_mail_name
+  const checkFromMail = mail => mail && mail.length <= 256 && mail in teacher_mail_name
 })
