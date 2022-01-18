@@ -7,7 +7,7 @@ from model.hash import generate_random_alpha, sha256_text
 # constant args
 
 ALPHA_LENGTH = 64
-DAY_OF_SEC = 86400000
+
 
 
 def user_login(mail, password):
