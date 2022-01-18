@@ -1,6 +1,4 @@
 import psycopg2
-import urllib.parse
-import os
 
 from model.db import get_connection
 
@@ -8,7 +6,12 @@ def select_all():
     try:
         conn = get_connection()
         cur = conn.cursor()
-        cur.execute("SELECT * from reports")
+        cur.execute("SELECT reports.company,reports.prefecture,departments.name,students.graduation_year,tests.stage from reports "
+                        + "JOIN users ON users.id = reports.student_id"
+                        + "JOIN students ON students.id = users.id"
+                        + "JOIN departments ON departments.id = students.department_id"
+                        + "JOIN tests ON tests.report_id = reports.id"
+                    )
 
         rows = cur.fetchall()
 
