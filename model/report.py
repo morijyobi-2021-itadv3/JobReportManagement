@@ -6,11 +6,11 @@ def select_all():
     try:
         conn = get_connection()
         cur = conn.cursor()
-        cur.execute("SELECT reports.company,reports.prefecture,departments.name,students.graduation_year,tests.stage from reports "
-                        + "JOIN users ON users.id = reports.student_id"
-                        + "JOIN students ON students.id = users.id"
-                        + "JOIN departments ON departments.id = students.department_id"
-                        + "JOIN tests ON tests.report_id = reports.id"
+        cur.execute("SELECT reports.company,tests.stage,departments.name,students.graduation_year,reports.prefecture from reports "
+                        + "JOIN users ON users.id = reports.student_id "
+                        + "JOIN students ON students.id = users.id "
+                        + "JOIN departments ON departments.id = students.department_id "
+                        + "JOIN tests ON tests.report_id = reports.id "
                     )
 
         rows = cur.fetchall()
@@ -22,5 +22,5 @@ def select_all():
     except psycopg2.OperationalError:
         print("DBに接続できません")
     except Exception:
-        print("エラーが発生しました。")
+        print("エラーが発生しました。", Exception)
  
