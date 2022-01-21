@@ -1,6 +1,38 @@
 {% extends "template.html" %} 
 
+{% block css %}
+<link rel="stylesheet" href="../static/css/report_list.css">
+{% endblock %}
+
 {% block content %}
+
 <h1>学生用報告書一覧ページ</h1>
-<a>aaaa</a>
+<ul class="report_list_ul">
+    {% for data in datas %}
+    <a href="#">
+        <li class="report_list_li">
+            <div class="list_data_wrapper">
+                <span class="material-icons-outlined">business</span>
+                <span class="list_data">{{data[0]}}</span>
+            </div>
+            <div class="list_data_wrapper">
+                <span class="material-icons-outlined">military_tech</span>
+                <span class="list_data">{{data[1]}}試験</span>
+            </div>
+            <div class="list_data_wrapper">
+                <span class="material-icons-outlined">person</span>
+                <span class="list_data">{{data[2]}}</span>
+            </div>
+            <div class="list_data_wrapper">
+                <span class="material-icons-outlined">schedule</span>
+                <span class="list_data">{{data[3]}}年度</span>
+            </div>
+            <div class="list_data_wrapper">
+                <span class="material-icons-outlined">location_on</span>
+                <span class="list_data">{{data[4]}}</span>
+            </div>
+        </li>
+    </a>
+    {% endfor %}
+    </ul>
 {% endblock %}
