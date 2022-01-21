@@ -1,6 +1,6 @@
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
-JST = datetime.timezone(datetime.timedelta(hours=+9), 'JST')
+JST = timezone(timedelta(hours=+9), 'JST')
 
 
 def set_utc_timezone(dt):
@@ -13,7 +13,7 @@ def set_utc_timezone(dt):
         timezone(utc)が付与されたdatetime
 
     """
-    return dt.replace(tzinfo=datetime.timezone.utc)
+    return dt.replace(tzinfo=timezone.utc)
 
 
 def set_jst_timezone(dt):
