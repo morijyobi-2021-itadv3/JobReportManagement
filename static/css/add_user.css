@@ -56,8 +56,7 @@ form.add-user input[type="file"] {
   opacity: .8;
 }
 
-.add-user-table {
-  display:none;
+table {
   border-collapse: collapse;
   border: none;
   background: #fff;
@@ -65,26 +64,34 @@ form.add-user input[type="file"] {
   box-shadow: 0 2px 5px 3px rgba(255, 255, 255,.6);
 }
 
-.add-user-table th,
-.add-user-table td {
+.add-user-table {
+  display:none;
+}
+
+.error-table {
+  margin-bottom: 30px;
+}
+
+th,
+td {
   padding: 8px 10px;
 }
 
-.add-user-table th {
+th {
   background: #1b1a22;
   color: #fff;
   border-right: 1px solid #fff;
 }
 
-.add-user-table td {
+td {
   border-right: 1px solid #444444
 }
 
-.add-user-table td:last-child {
+td:last-child {
   border-right: none;
 }
 
-.add-user-table tr:nth-child(odd) {
+tr:nth-child(odd) {
   background: rgb(237, 237, 255);
 }
 
@@ -117,12 +124,16 @@ form.add-user input[type="file"] {
   color: #dc3545;
 }
 
-.add-user-table caption {
+.table-caption {
   margin: 5px 0;
   padding: 0px 10px;
   font-size: 2.5rem;
   text-align: left;
-  border-left: 5px solid #11101d;
+  border-left: 10px solid #11101d;
+}
+
+.table-caption.color-red {
+  color: #dc3545;
 }
 
 span.btn {

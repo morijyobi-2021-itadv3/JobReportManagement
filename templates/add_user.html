@@ -30,7 +30,7 @@
         <option value="{{department[1]}}">{{department[1]}}</option>
       {% endfor %}
     </select>
-    <p class="note">ファイルを選択する場合は学科・コースを選択してください。</p>
+    <p class="note">ファイルを選択する場合は学科・コースを選択してください</p>
     <label for="file-input" class="file-input-label">
       <input type="file" accept="text/csv" id="file-input" name="csv" disabled="true">ファイルを選択
     </label>
@@ -42,8 +42,28 @@
     <button type="submit" class="btn submit" disabled>ユーザを追加する</button>
   </form>
 
+  {% if error_list | length > 0 %}
+  <div class="table-caption color-red">以下のユーザは追加できませんでした</div>
+  <table class="error-table">
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>メールアドレス</th>
+      </tr>
+    </thead>
+    <tbody>
+  {% for error_data in error_list %}
+    <tr>
+      <td>{{ error_data['name'] }}</td>
+      <td>{{ error_data['mail'] }}</td>
+    </tr>
+  {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+
   <table class="add-user-table">
-    <caption>プレビュー</caption>
+    <caption class="table-caption">プレビュー</caption>
     <thead>
       <tr></tr>
     </thead>
