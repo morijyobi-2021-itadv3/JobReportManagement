@@ -100,7 +100,7 @@ def add_new_users(dictionaryArray,user_type_number,department_id):
         id = get_latest_user_id()
 
         # 担任IDを取得
-        teacher_id = get_userId_with_mail(userData['担任名'])
+        teacher_id = get_userId_with_mail(userData['担任名メールアドレス'])
         
         #　studentテーブルにデータを追加する処理
         insert_new_student(id,userData['卒業年度'],userData['学籍番号'],department_id,teacher_id)
