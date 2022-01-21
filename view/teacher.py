@@ -1,6 +1,5 @@
 from types import resolve_bases
 from flask import Flask, Blueprint, render_template, request, redirect, jsonify
-import csv, io
 from model.departments import get_departments_visible,get_departmentId_with_name
 from model.users import get_teacher_info, insert_new_user,get_latest_user_id,get_userId_with_mail
 from model.students import insert_new_student
@@ -13,14 +12,23 @@ teacher_bp = Blueprint('teacher',__name__, url_prefix='/teacher')
 def add_user():
   if(request.method == 'GET'):
     # 学科コース名を取得する
-    departments = get_departments_visible()
+    try: 
+      departments = get_departments_visible()
+    except Exception as e:
+      print(e)
+
     return render_template('add_user.html',departments=departments)
   else:
     # 送信された各種データの取得
     csvdata = request.files.get('csv')
     user_type = request.form.get('user-type')
     department = request.form.get('department')
-    department_id = get_departmentId_with_name(department)
+
+    try:
+      department_id = get_departmentId_with_name(department)
+    except Exception as e:
+      print(e)
+
     user_type_number = None
 
     if(user_type == '学生'):
@@ -47,9 +55,14 @@ def add_user():
         dataObj.setdefault(header[index],row[index])
       dictionaryArray.append(dataObj)
 
-    add_new_users(dictionaryArray,user_type_number,department_id)
+    # ユーザーの新規追加
+    try:
+      error_list = add_new_users(dictionaryArray,user_type_number,department_id)
+    except Exception as e:
+      print(e)
+      
 
-    return render_template('index.html')
+    return render_template('index.html',error_list=error_list)
 
 def add_new_users(dictionaryArray,user_type_number,department_id):
   """
@@ -59,8 +72,11 @@ def add_new_users(dictionaryArray,user_type_number,department_id):
     user_type_number: 追加するユーザータイプの数字
     department_id: 学科ID
   Returns:
-    bool: 成功したかどうか
+    Array: 失敗したデータが含まれた配列(ないときは空の配列)
   """
+
+  # errorのデータを格納する配列 
+  error_list = []
 
   # 1行ずつデータを追加
   for userData in dictionaryArray:
@@ -68,7 +84,10 @@ def add_new_users(dictionaryArray,user_type_number,department_id):
     salt = generate_random_alpha(5)
     hashedPassword = sha256_text(password,salt)
     
-    insert_new_user(hashedPassword,salt,userData['氏名'],userData['メールアドレス'],user_type_number)
+    try:
+      insert_new_user(hashedPassword,salt,userData['氏名'],userData['メールアドレス'],user_type_number)
+    except Exception as e:
+      print(e)
 
     #　登録されたメールアドレス宛に、ランダムに生成したパスワード(仮)を送信する
     # 誤送信を防ぐためにコメントアウトしておく
@@ -76,20 +95,30 @@ def add_new_users(dictionaryArray,user_type_number,department_id):
     
     # 学生のデータを追加
     if(user_type_number == 0):
-      # 最新のユーザーIDを取得
-      id = get_latest_user_id()
+      try: 
+        # 最新のユーザーIDを取得
+        id = get_latest_user_id()
 
-      # 担任IDを取得
-      teacher_id = get_userId_with_mail(userData['担任名'])
-      
-      #　studentテーブルにデータを追加する処理
-      insert_new_student(id,userData['卒業年度'],userData['学籍番号'],department_id,teacher_id)
+        # 担任IDを取得
+        teacher_id = get_userId_with_mail(userData['担任名'])
+        
+        #　studentテーブルにデータを追加する処理
+        insert_new_student(id,userData['卒業年度'],userData['学籍番号'],department_id,teacher_id)
+      except Exception as e :
+        error_info = {'name': userData['氏名'], 'mail': userData['メールアドレス']}
+        error_list.append(error_info)
+        print(e)
+
+  return error_list
 
 @teacher_bp.route('/add_user/api/teacher_info',methods=['GET'])
 def get_teacher_info_api():
 
-  # 教員の名前とメールのデータを取得する
-  teacher_info_array = get_teacher_info()
+  try:
+    # 教員の名前とメールのデータを取得する
+    teacher_info_array = get_teacher_info()
+  except Exception as e:
+    print(e)
 
   # オブジェクトにする
   teacher_info_obj = {}
