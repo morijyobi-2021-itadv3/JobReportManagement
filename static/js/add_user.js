@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded',async() => {
 
     const file_result = fileReader.result.split('\r\n')
     let header = file_result[0].split(',')
-    header[header.length-1] = '担任名'
+    if(user_type == '学生') header[header.length-1] = '担任名'
     
     file_result.shift()
 
