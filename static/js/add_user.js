@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded',async() => {
   file_input.addEventListener('change', () => {
     //CSVデータのヘッダーデータの取得と削除
     const file =  file_input.files[0]
-    fileReader.readAsText(file,'Shift-JIS')
+    fileReader.readAsText(file,'utf-8')
   })
 
   //アップロードされたファイルが読み込まれた時の処理
