@@ -42,6 +42,10 @@
     <button type="submit" class="btn submit" disabled>ユーザを追加する</button>
   </form>
 
+  {% if not error_text %}
+    <p class="color-red">{{ error_text }}</p>
+  {% endif %}
+
   {% if error_list | length > 0 %}
   <div class="table-caption color-red">以下のユーザは追加できませんでした</div>
   <table class="error-table">

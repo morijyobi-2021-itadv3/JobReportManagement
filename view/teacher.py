@@ -10,14 +10,17 @@ teacher_bp = Blueprint('teacher',__name__, url_prefix='/teacher')
 
 @teacher_bp.route('/add_user',methods=['GET','POST'])
 def add_user():
+  error_text = ''
   if(request.method == 'GET'):
     # 学科コース名を取得する
     try: 
       departments = get_departments_visible()
     except Exception as e:
+      error_text = '学科コースを取得できませんでした' 
       print(e)
-
-    return render_template('add_user.html',departments=departments)
+      
+    return render_template('add_user.html',departments=departments,error_text=error_text)
+    
   else:
     # 送信された各種データの取得
     csvdata = request.files.get('csv')
