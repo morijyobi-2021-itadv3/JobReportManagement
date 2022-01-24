@@ -42,7 +42,7 @@ def add_user():
       user_type_number = 2
     
     # 取得したCSVデータを二次元配列に格納
-    csvDataMatrix = [[data.strip() for data in row.decode(encoding='shift-jis').split(',')] for row in csvdata]
+    csvDataMatrix = [[data.strip() for data in row.decode(encoding='utf-8').split(',')] for row in csvdata]
     
     # のちに使いやすいように[{},{}]辞書型にする
     # 辞書型のkeyとなる部分の配列
