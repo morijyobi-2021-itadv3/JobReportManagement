@@ -70,6 +70,29 @@ def get_userId_with_mail(mail):
 
   return id
 
+def get_userId_mail():
+  """
+  教員ユーザーのid,mailのデータを全件取得
+    Args:
+      なし
+    Returns:
+      Array: 教員情報の配列(id,メール)
+  """
+
+  conn = get_connection()
+
+  sql = 'SELECT mail,id FROM users WHERE user_type = 1'
+
+  cur = conn.cursor()
+  cur.execute(sql)
+  result = cur.fetchall()
+
+  cur.close()
+  conn.close()
+
+  return result
+
+
 def get_teacher_info():
   """
   教員情報を取得

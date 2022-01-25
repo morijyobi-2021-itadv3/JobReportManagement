@@ -1,7 +1,7 @@
 from types import resolve_bases
 from flask import Flask, Blueprint, render_template, request, redirect, jsonify
 from model.departments import get_departments_visible,get_departmentId_with_name
-from model.users import get_teacher_info, insert_new_user,get_latest_user_id,get_userId_with_mail
+from model.users import get_teacher_info, insert_new_user,get_latest_user_id,get_userId_with_mail,get_userId_mail
 from model.students import insert_new_student
 from model.hash import sha256_text,generate_random_alpha
 from model.mail import send_mail
@@ -10,6 +10,7 @@ teacher_bp = Blueprint('teacher',__name__, url_prefix='/teacher')
 
 @teacher_bp.route('/add_user',methods=['GET','POST'])
 def add_user():
+
   error_text = ''
   if(request.method == 'GET'):
     # 学科コース名を取得する
@@ -81,6 +82,15 @@ def add_new_users(dictionaryArray,user_type_number,department_id):
   # errorのデータを格納する配列 
   error_list = []
 
+  # 教員のメールとidが対になった辞書型データを作成
+  # {mail:id,mail:id,...}
+  teacher_id_mail = {}
+  try:
+    for data in get_userId_mail():
+      teacher_id_mail.setdefault(data[0],data[1])
+  except Exception as e:
+    print(e)
+
   # 1行ずつデータを追加
   for userData in dictionaryArray:
     password = generate_random_alpha(10)
@@ -103,7 +113,7 @@ def add_new_users(dictionaryArray,user_type_number,department_id):
         id = get_latest_user_id()
 
         # 担任IDを取得
-        teacher_id = get_userId_with_mail(userData['担任名メールアドレス'])
+        teacher_id = teacher_id_mail[userData['担任メールアドレス']]
         
         #　studentテーブルにデータを追加する処理
         insert_new_student(id,userData['卒業年度'],userData['学籍番号'],department_id,teacher_id)
