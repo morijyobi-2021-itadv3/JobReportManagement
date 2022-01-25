@@ -2,7 +2,7 @@ import psycopg2
 
 from model.db import get_connection
 
-def select_all():
+def select_reports():
     try:
         conn = get_connection()
         cur = conn.cursor()
