@@ -19,7 +19,8 @@ def sha256_text(text, salt=""):
    """
     if salt is None:
         salt = ''
-
+    print(text)
+    print(salt)
     try:
         output = hashlib.pbkdf2_hmac("sha256", bytes(text, 'utf-8'), bytes(salt, 'utf-8'), 5290).hex()
 

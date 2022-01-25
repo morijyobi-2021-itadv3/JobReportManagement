@@ -1,6 +1,5 @@
 import datetime
 
-
 from model.db import get_connection
 from model.hash import generate_random_alpha, sha256_text
 
@@ -23,8 +22,8 @@ def user_login(mail, password):
     conn = get_connection()
     cur = conn.cursor()
     cur.execute('SELECT salt FROM users WHERE mail = (%s)', (mail,))
-    salt = cur.fetchone()
-    cur.execute('SELECT * FROM users WHERE mail = (%s) AND password = '(sha256_text(password, salt)))
+    salt = cur.fetchone()[0]
+    cur.execute('SELECT * FROM users WHERE mail = (%s) AND password = (%s)', (mail, sha256_text(password, salt),))
     user = cur.fetchone()
 
     if user:
@@ -63,3 +62,19 @@ def get_token(mail):
     cur.close()
     conn.close()
     return None
+
+
+def is_exist_mail(mail):
+    """
+    メールが存在するかを判別する
+    Args:
+        mail: メールアドレス
+    Returns:
+        bool: 存在可否
+    """
+
+    conn = db.connect_sql()
+    cur = conn.cursor()
+    cur.execute('SELECT id FROM users WHERE mail = (%s)', (mail,))
+    id = cur.fetchone()
+    return id or None

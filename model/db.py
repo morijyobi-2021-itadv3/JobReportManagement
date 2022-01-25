@@ -12,11 +12,12 @@ def get_connection():
     環境変数(DATABASE_URL)を使用します。
 
     環境変数の構成:
-        "postgresql://{ユーザー名}:{パスワード}@{host名}:{ポート}/{db名}"
+        "postgresql://{ユーザー名}:{パスワード}＠{host名}:{ポート名}/{db}"
 
     """
     try:
         url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
+        print(url)
         conn = psycopg2.connect(
             database=url.path[1:],
             user=url.username,
@@ -24,6 +25,7 @@ def get_connection():
             host=url.hostname,
             port=url.port
         )
+        print(conn)
         return conn
     except KeyError:
         print("環境変数の設定がされていません")

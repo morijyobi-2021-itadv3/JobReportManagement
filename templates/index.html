@@ -12,7 +12,7 @@
   <h1>就活報告書管理システム</h1>
    <div class="form-wrapper">
       <h2>ログイン</h2>
-      <form method="post" action="/login">
+      <form method="post" action="{{ url_for("login") }}">
         <div class="form-item">
           <label for="email">学校メールアドレス</label>
           <input type="email" name="email" required="required" placeholder="">
@@ -26,7 +26,7 @@
         </div>
       </form>
       <div class="form-footer">
-        <a href="#">パスワードを忘れた場合</a>
+        <a href="{{ url_for("reset_password") }}">パスワードを忘れた場合</a>
       </div>
     </div>
 </body>
