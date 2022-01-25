@@ -12,7 +12,7 @@ def get_connection():
     環境変数(DATABASE_URL)を使用します。
 
     環境変数の構成:
-        "postgresql://{ホスト名}:{ポート番号}/{DB名}?user={ユーザ名}&password={パスワード}"
+        "postgresql://{ユーザー名}:{パスワード}@{host名}:{ポート}/{db名}"
 
     """
     try:
