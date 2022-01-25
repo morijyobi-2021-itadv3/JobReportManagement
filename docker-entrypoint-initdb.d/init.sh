@@ -51,12 +51,16 @@ INSERT INTO reports (student_id, teacher_id, company, zip_code, prefecture, addr
 INSERT INTO reports (student_id, teacher_id, company, zip_code, prefecture, address, occupations_id, form, advice, is_show, job_teacher_id, test_result) VALUES (3, 5, '株式会社ccc', '9040004', '沖縄県', '沖縄県沖縄市中央２丁目１', 3, '学校', 'SPI対策はしっかりしておきましょう、本番の問題は大学レベルのものまで出ます。', true, 6, 2);
 INSERT INTO reports (student_id, teacher_id, company, zip_code, prefecture, address, occupations_id, form, advice, is_show, job_teacher_id, test_result) VALUES (1, 4, '株式会社ddd', '0984451', '北海道', '北海道天塩郡豊富町', 4, '学校', '人間性がよく見られます。ベンチャー企業で、イケイケの人たちの集まりなので性格が合えばきっと働きやすい企業なんだと思います', true, 6, 3);
 INSERT INTO reports (student_id, teacher_id, company, zip_code, prefecture, address, occupations_id, form, advice, is_show, job_teacher_id, test_result) VALUES (2, 5, '株式会社eee', '8701223', '大分県', ' 大分県大分市今市1882-1', 5, '学校', '試験自体もその人がどのような人か判断するだけのようなものなので受験すれば内定を貰えると思います', true, 6, 4);
+INSERT INTO reports (student_id, teacher_id, company, zip_code, prefecture, address, occupations_id, form, advice, is_show, job_teacher_id, test_result) VALUES (2, 5, '株式会社fff', '6270242', '東京都', ' 京都府京丹後市丹後町久僧52107', 5, '学校', '給料が高いのでおすすめです', true, 6, 4);
 INSERT INTO tests (report_id, stage, start_date, end_date, datails_text, is_status, is_checked_student) VALUES (1, 1, '2022-01-01 10:00:00', '2022-01-01 12:00:00', '受験者は私一人に対して面接官は3人いました。・なぜモリジョビを選んだか・なぜ自社なのか・自分は思う自社を代表する製品はなにか・自己PR以外の自分が他より勝る部分は何か・希望は営業だけか・志望した動機はなにか・3年後、自分はどうなっていると思うか。作文は「人生においての仕事のありかたとは」という題材で制限時間はそこまで長くないです。SPIも普段の対策をしていれば落とすことはないです。', 2, true);
 INSERT INTO tests (report_id, stage, start_date, end_date, datails_text, is_status, is_checked_student) VALUES (2, 1, '2022-01-14 15:00:00', '2022-01-14 15:30:00', '面接官と以前からのやり取りでほぼ内定は確実だったので、会社概要など情報の共有程度で試験は終わりました。', 1, false);
 INSERT INTO tests (report_id, stage, start_date, end_date, datails_text, is_status, is_checked_student) VALUES (3, 1, '2022-10-13 12:00:00', '2022-10-13 14:00:00', 'SPIは時間が限られていて余裕は少なかったです。問題自体もとても難しいもので、対策をしっかりとたてて本番では焦らないことが大事です。', 3, true);
 INSERT INTO tests (report_id, stage, start_date, end_date, datails_text, is_status, is_checked_student) VALUES (3, 2, '2022-11-11 11:00:00', '2022-11-11 13:00:00', '面接は私一人に対して、役員や会長を含めて5人の面接官でした。答えるたびにメモなどを取られるので不安や焦りが募るもので、物々しい雰囲気でした。', 3, false);
 INSERT INTO tests (report_id, stage, start_date, end_date, datails_text, is_status, is_checked_student) VALUES (4, 1, '2022-01-02 9:00:00', '2022-01-02 9:30:00', 'SPIも作文もただ受けるだけでいい簡単なものでした。面接自体もとてもラフなものでしたが社長さんも部長さんも若くてとても元気な方なので私とは少し価値観などが共感できなかったです。', 0, false);
 INSERT INTO tests (report_id, stage, start_date, end_date, datails_text, is_status, is_checked_student) VALUES (5, 1, '2022-01-14 15:00:00', '2022-01-14 15:30:00', '面接のみの試験で正直人が足りていないので受験すれば合格できます。', 1, false);
+INSERT INTO tests (report_id, stage, start_date, end_date, datails_text, is_status, is_checked_student) VALUES (6, 1, '2022-01-15 15:00:00', '2022-01-15 15:30:00', '面接ではESを深堀されます。', 3, true);
+INSERT INTO tests (report_id, stage, start_date, end_date, datails_text, is_status, is_checked_student) VALUES (6, 2, '2022-01-16 16:00:00', '2022-01-16 16:30:00', 'SPIも推論についてとても問題が多く難しかったです。', 3, true);
+INSERT INTO tests (report_id, stage, start_date, end_date, datails_text, is_status, is_checked_student) VALUES (6, 3, '2022-01-17 17:00:00', '2022-01-17 17:30:00', '集団面接では他と比べてどれぐらい早く回答できるかが見られていると思います。', 3, true);
 INSERT INTO test_details (test_id, test_category, data1, data2) VALUES (1, 2, null, null);
 INSERT INTO test_details (test_id, test_category, data1, data2) VALUES (1, 4, null, null);
 INSERT INTO test_details (test_id, test_category, data1, data2) VALUES (1, 6, '3', '60');
@@ -65,6 +69,9 @@ INSERT INTO test_details (test_id, test_category, data1, data2) VALUES (3, 2, nu
 INSERT INTO test_details (test_id, test_category, data1, data2) VALUES (4, 6, '5', '120');
 INSERT INTO test_details (test_id, test_category, data1, data2) VALUES (5, 6, '2', '0');
 INSERT INTO test_details (test_id, test_category, data1, data2) VALUES (6, 6, '1', '30');
+INSERT INTO test_details (test_id, test_category, data1, data2) VALUES (7, 6, '1', '30');
+INSERT INTO test_details (test_id, test_category, data1, data2) VALUES (7, 2, null, null);
+INSERT INTO test_details (test_id, test_category, data1, data2) VALUES (7, 7, '5', '30');
 INSERT INTO test_report_reviews (test_id, comment) VALUES (1, 'もう少し内容を詳しく記述してください');
 INSERT INTO test_report_reviews (test_id, comment) VALUES (3, '承認します、2次試験も頑張ってください');
 INSERT INTO test_report_reviews (test_id, comment) VALUES (4, 'お疲れ様でした、今回は残念な結果になりましたが次も頑張ってください');
