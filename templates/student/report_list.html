@@ -8,31 +8,31 @@
 
 <h1>学生用報告書一覧ページ</h1>
 <ul class="report_list_ul">
-    {% for data in datas %}
-    <a href="#">
+    {% for data in report %}
+    <a href="{{ url_for('student.sample', id=data[0], name=data[1]) }}">
         <li class="report_list_li">
             <div class="list_data_wrapper">
                 <span class="material-icons-outlined">business</span>
-                <span class="list_data">{{data[0]}}</span>
+                <span class="list_data">{{data[1]}}</span>
             </div>
             <div class="list_data_wrapper">
                 <span class="material-icons-outlined">military_tech</span>
-                <span class="list_data">{{data[1]}}試験</span>
+                <span class="list_data">{{data[2]}}次試験</span>
             </div>
             <div class="list_data_wrapper">
                 <span class="material-icons-outlined">person</span>
-                <span class="list_data">{{data[2]}}</span>
+                <span class="list_data">{{data[3]}}</span>
             </div>
             <div class="list_data_wrapper">
                 <span class="material-icons-outlined">schedule</span>
-                <span class="list_data">{{data[3]}}年度</span>
+                <span class="list_data">{{data[4]}}年度</span>
             </div>
             <div class="list_data_wrapper">
                 <span class="material-icons-outlined">location_on</span>
-                <span class="list_data">{{data[4]}}</span>
+                <span class="list_data">{{data[5]}}</span>
             </div>
         </li>
     </a>
     {% endfor %}
-    </ul>
+</ul>
 {% endblock %}
