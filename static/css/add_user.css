@@ -1,0 +1,166 @@
+.title {
+  margin-bottom: 20px;
+}
+.add-user-container {
+  padding: 20px 70px 40px;
+  background:#F7FAFF;
+}
+
+form.add-user {
+  padding: 20px;
+  border: 2px solid #eee;
+  border-radius: 15px;
+  text-align: left;
+  background: #fff;
+}
+
+form.add-user input[type="radio"]{
+  margin-right: 10px;
+  transform: scale(1.4);
+}
+
+form.add-user input[type="radio"] + label {
+  font-size: 1.8rem;
+}
+
+.note {
+  margin-top: 10px;
+  color:rgb(129, 129, 129);
+  font-size: 1.3rem;
+}
+
+.form-title {
+  font-size: 2.3rem;
+  margin: 20px 0;
+  border-left: 10px solid #11101d;
+  padding-left: 10px;
+}
+
+form.add-user input[type="file"] {
+  display: none;
+}
+
+.file-input-label {
+  margin: 10px 10px 10px 0;
+  padding: 5px 10px;
+  display: inline-block;
+  cursor: pointer;
+  color: #11101d;
+  border: 1px solid #11101d;
+  box-shadow: 0px 1px 2px rgba(0,0,0,.3);
+  border-radius:8px;
+  transition: .3s
+}
+
+.file-input-label:hover {
+  opacity: .8;
+}
+
+table {
+  border-collapse: collapse;
+  border: none;
+  background: #fff;
+  padding: 10px;
+  box-shadow: 0 2px 5px 3px rgba(255, 255, 255,.6);
+}
+
+.add-user-table {
+  display:none;
+}
+
+.error-table {
+  margin-bottom: 30px;
+}
+
+th,
+td {
+  padding: 8px 10px;
+}
+
+th {
+  background: #1b1a22;
+  color: #fff;
+  border-right: 1px solid #fff;
+}
+
+td {
+  border-right: 1px solid #444444
+}
+
+td:last-child {
+  border-right: none;
+}
+
+tr:nth-child(odd) {
+  background: rgb(237, 237, 255);
+}
+
+.add-user-table tr td:nth-child(2),
+.add-user-table tr td:nth-child(3),
+.add-user-table tr td:nth-child(4),
+.add-user-table tr td:nth-child(5),
+.add-user-table tr td:nth-child(6) {
+  text-align: left;
+}
+
+.material-icons-outlined {
+  font-size: 2.5rem;
+  height: 30px;
+  min-width: 30px;
+  line-height: 30px;
+  border-radius: 12px;
+  text-align: center;
+  font-family: 'Material Icons';
+}
+
+.material-icons-outlined.success {
+  color: #28a745;
+}
+.material-icons-outlined.error {
+  color:#dc3545;
+}
+
+.add-user-table td.error {
+  color: #dc3545;
+}
+
+.table-caption {
+  margin: 5px 0;
+  padding: 0px 10px;
+  font-size: 2.5rem;
+  text-align: left;
+  border-left: 10px solid #11101d;
+}
+
+.table-caption.color-red {
+  color: #dc3545;
+}
+
+span.btn {
+  margin: 10px 10px 10px 0;
+  padding: 5px 10px;
+  border: 1px solid #11101d;
+  color: #11101d;
+}
+
+.btn.submit {
+  width: 400px;
+  display: block;
+  margin: 10px auto 0;
+  padding: 10px 20px;
+  background: #11101d;
+  color: #fff;
+}
+
+.btn.submit:hover {
+  transform: scale(.95);
+  opacity: .8;
+}
+
+.download-group a:hover span.btn::before {
+  width: 100%;
+}
+
+.download-group p::after {
+  content: '↓';
+}
