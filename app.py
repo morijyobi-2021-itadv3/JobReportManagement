@@ -1,16 +1,19 @@
-from datetime import timedelta
 from flask import Flask, render_template, redirect, request, session, abort
 import os
 from model import db
 from model.hash import generate_random_alpha, sha256_text
 from model.mail import smtp_send_mail
 from model.user import user_login, is_exist_mail, get_token
+from flask import Flask, Blueprint, render_template
+from view.teacher import teacher_bp
+from model.db import get_connection
 
 app = Flask(__name__)
 
+app.register_blueprint(teacher_bp)
+app.config['JSON_AS_ASCII'] = False
 app.secret_key = os.environ["SECRET_KEY"]
 app.permanent_session_lifetime = timedelta(hours=1)
-
 
 @app.route("/")
 def index():
