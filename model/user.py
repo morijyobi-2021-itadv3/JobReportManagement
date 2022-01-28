@@ -1,6 +1,5 @@
 import datetime
 
-
 from model.db import get_connection
 from model.hash import generate_random_alpha, sha256_text
 
@@ -23,8 +22,11 @@ def user_login(mail, password):
     conn = get_connection()
     cur = conn.cursor()
     cur.execute('SELECT salt FROM users WHERE mail = (%s)', (mail,))
-    salt = cur.fetchone()
-    cur.execute('SELECT * FROM users WHERE mail = (%s) AND password = '(sha256_text(password, salt)))
+    sql_result = cur.fetchone()
+    if not sql_result:
+        return None
+    salt = sql_result[0]
+    cur.execute('SELECT * FROM users WHERE mail = (%s) AND password = (%s)', (mail, sha256_text(password, salt),))
     user = cur.fetchone()
 
     if user:
@@ -44,18 +46,21 @@ def get_token(mail):
            mailが空の時は　None
     """
 
-    conn = db.connect_sql()
+    conn = get_connection()
+
     cur = conn.cursor()
     cur.execute('SELECT id FROM users WHERE mail = (%s)', (mail,))
     id = cur.fetchone()
-
-    if id:
+    if id[0]:
+        cur.close()
+        cur = conn.cursor()
         token = generate_random_alpha(64)
         now_date = datetime.datetime.now()
         day_later = now_date + datetime.timedelta(days=1)
-        cur.execute('INSERT INTO change_passwords(user_id, hash, exp_datetime, updated_at)',
-                    (id, sha256_text(token, id), now_date, day_later))
-        cur.fetchone()
+
+        cur.execute('INSERT INTO change_passwords(user_id, hash, exp_datetime, updated_at) VALUES(%s,%s,%s,%s) ',
+                    (id, sha256_text(str(token), str(id[0])), now_date, day_later))
+        conn.commit()
         cur.close()
         conn.close()
         return token
@@ -63,3 +68,19 @@ def get_token(mail):
     cur.close()
     conn.close()
     return None
+
+
+def is_exist_mail(mail):
+    """
+    メールが存在するかを判別する
+    Args:
+        mail: メールアドレス
+    Returns:
+        bool: 存在可否
+    """
+
+    conn = db.connect_sql()
+    cur = conn.cursor()
+    cur.execute('SELECT id FROM users WHERE mail = (%s)', (mail,))
+    id = cur.fetchone()
+    return id or None
