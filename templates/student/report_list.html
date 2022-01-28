@@ -5,11 +5,16 @@
 {% endblock %}
 
 {% block content %}
-<select name="example">
+<select name="industry">
     {% for industry in industry %}
     <option value={{industry[0]}}>{{industry[1]}}</option>
     {% endfor %}
 </select>
+<select name="result">
+    <option value="0">合格</option>
+    <option value="1">不合格</option>
+</select>
+
 
 <h1>学生用報告書一覧ページ</h1>
 <ul class="report_list_ul">
