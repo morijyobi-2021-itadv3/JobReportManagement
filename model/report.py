@@ -25,4 +25,22 @@ def select_reports():
         print("DBに接続できません")
     except Exception:
         print("エラーが発生しました。", Exception)
+
+
+def select_prefecture():
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT prefecture,count(prefecture) FROM reports GROUP BY prefecture ORDER BY count(prefecture) DESC")
+
+        rows = cur.fetchall()
+
+        return rows
+
+    except KeyError:
+        print("環境変数の設定がされていません")
+    except psycopg2.OperationalError:
+        print("DBに接続できません")
+    except Exception:
+        print("エラーが発生しました。", Exception)
  
