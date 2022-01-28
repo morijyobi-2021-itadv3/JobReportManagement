@@ -34,4 +34,3 @@ def get_connection():
         print("DBに接続できません")
     except Exception:
         print("エラーが発生しました。")
- 
