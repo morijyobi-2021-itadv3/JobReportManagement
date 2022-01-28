@@ -1,6 +1,8 @@
 from crypt import methods
+from select import select
 from flask import Blueprint, render_template, request
 from model.report import select_reports
+from model.report import select_prefecture
 from model.industries import select_industries
 from model.students import select_graduation_year
 
@@ -23,8 +25,9 @@ def open_list():
 
         industry = select_industries();
         graduation = select_graduation_year();
+        prefecture = select_prefecture();
 
-        return render_template('student/report_list.html', report=reports, industry=industry, graduation=graduation)
+        return render_template('student/report_list.html', report=reports, industry=industry, graduation=graduation, prefecture=prefecture)
 
     elif request.method == 'POST':
         print('aaa')
