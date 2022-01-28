@@ -14,7 +14,11 @@
     <option value="0">合格</option>
     <option value="1">不合格</option>
 </select>
-
+<select name="graduation">
+    {% for graduation in graduation %}
+    <option value={{graduation[0]}}>{{graduation[0]}}</option>
+    {% endfor %}
+</select>
 
 <h1>学生用報告書一覧ページ</h1>
 <ul class="report_list_ul">
