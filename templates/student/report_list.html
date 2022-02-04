@@ -1,4 +1,4 @@
-{% extends "template.html" %} 
+{% extends "template.html" %}
 
 {% block css %}
 <link rel="stylesheet" href="../static/css/report_list.css">
@@ -6,20 +6,24 @@
 
 {% block content %}
 <select name="industry">
+    <option value="">業種</option>
     {% for industry in industry %}
     <option value={{industry[0]}}>{{industry[1]}}</option>
     {% endfor %}
 </select>
 <select name="result">
+    <option value="">合否</option>
     <option value="0">合格</option>
     <option value="1">不合格</option>
 </select>
 <select name="graduation">
+    <option value="">年度</option>
     {% for graduation in graduation %}
     <option value={{graduation[0]}}>{{graduation[0]}}</option>
     {% endfor %}
 </select>
 <select name="prefecture">
+    <option value="">本社所在地</option>
     {% for prefecture in prefecture %}
     <option value={{prefecture[0]}}>{{prefecture[0]}}</option>
     {% endfor %}
