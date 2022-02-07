@@ -33,9 +33,8 @@
 <div class="form-wrapper">
 
     <h2>ログイン</h2>
-
 {% if pgmsg %}
-    <p style="text-align: center;font-size: 1em; margin-bottom: 5px">{{ pgmsg }}</p>
+    <p style="text-align: center;font-size: 0.9em; margin-bottom: 1em">{{ pgmsg }}</p>
     {% endif %}
     <form method="post" action="{{ url_for("login") }}">
         <div class="form-item">
