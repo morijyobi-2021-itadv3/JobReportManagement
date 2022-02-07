@@ -145,3 +145,34 @@ def rechange_password(password, reset_id, user_id):
         return "エラーが発生しました。"
 
     return None
+
+
+def set_password(password, user_id):
+    """
+
+    Args:
+        password: パスワード平文
+        user_id: usersのid
+
+    Returns:
+        None 若しくは　String
+        エラーの場合はStringが返される
+
+    """
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        salt = generate_random_alpha(64)
+        cur.execute('UPDATE users SET password = (%s), salt = (%s),is_newuser = false WHERE id = (%s)',
+                          (sha256_text(password, salt), salt, user_id), )
+        conn.commit()
+        cur.close()
+
+
+        conn.close()
+    except Exception as e:
+        print(e)
+        return "エラーが発生しました。"
+
+
+    return None
