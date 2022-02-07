@@ -25,6 +25,7 @@ def get_connection():
             host=url.hostname,
             port=url.port
         )
+        print(conn)
         return conn
     except KeyError:
         print("環境変数の設定がされていません")
