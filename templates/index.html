@@ -35,7 +35,7 @@
     <h2>ログイン</h2>
 
 {% if pgmsg %}
-    <p>{{ pgmsg }}</p>
+    <p style="text-align: center;font-size: 1em; margin-bottom: 5px">{{ pgmsg }}</p>
     {% endif %}
     <form method="post" action="{{ url_for("login") }}">
         <div class="form-item">
