@@ -5,7 +5,7 @@ import os
 from model import db
 from model.hash import generate_random_alpha, sha256_text
 from model.send_mail import smtp_send_mail
-from model.user import user_login, is_exist_mail, get_token, find_reset_token, rechange_password
+from model.user import user_login, is_exist_mail, get_token, find_reset_token, rechange_password, set_password
 from flask import Flask, Blueprint, render_template
 from view.teacher import teacher_bp
 from model.db import get_connection
@@ -50,6 +50,14 @@ def login():
     password = request.form.get("password")
     login_result = user_login(mail, password)
     print(login_result)
+
+    if login_result[5]:
+        session.permanent = True
+        user = {'id': login_result[0]}
+        session['new_user'] = user
+        return render_template('new_password.html', pgmsg="初めてログインした場合、パスワード変更が必要です。")
+
+
     if login_result:
         session.permanent = True
         user = {}
@@ -63,7 +71,7 @@ def login():
         # TODO:各マイページへ遷移する
         print(user['permission'])
         if user['permission'] == 0:
-            return redirect('/student/home')
+            return redirect('/student')
         elif user in [1, 2]:
             return redirect('/teacher')
 
@@ -126,7 +134,12 @@ def change_password_get(token):
 @app.route("/change_password", methods=["POST"])
 def change_password():
     password = request.form.get("password")
-    print(session['reset_userid'])
+    if session['new_user']:
+        errmsg = set_password(password, session['new_user']['id'])
+        if errmsg:
+            return render_template("index.html", pgmsg=errmsg)
+        else:
+            return render_template("index.html", pgmsg="パスワードを変更しました")
 
     errmsg = rechange_password(password, session['reset_id'], session['reset_userid'])
 
