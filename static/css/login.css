@@ -22,8 +22,9 @@ body {
   background: #fafafa;
   margin: 3em auto;
   padding: 0 1em;
-  max-width: 370px;
+  max-width: 410px;
 }
+
 
 h1 {
   text-align: center;
@@ -55,7 +56,7 @@ form {
 
 .form-item input {
   background: #fafafa;
-  margin-top: 8%;
+  margin-top: 6%;
   border: none;
   border-bottom: 2px solid #e9e9e9;
   color: #666;
@@ -89,6 +90,13 @@ form {
   text-transform: uppercase;
   transition: background 0.3s ease-in-out;
   width: 100%;
+}
+.error_msg{
+  margin-top: 40px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 1em;
+  color: #f16272;
 }
 
 .button:hover {

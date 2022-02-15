@@ -1,33 +1,69 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../static/css/login.css">
-  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <title>就活報告書管理システム</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>就活報告書管理システム</title>
+    {% if errormsg %}
+        <style>
+            .form-item input {
+                background: #fafafa;
+                margin-top: 6%;
+                border: none;
+                border-bottom: 2px solid #e8a8af;
+                color: #666;
+                font-family: 'Open Sans', sans-serif;
+                font-size: 1.12em;
+                height: 30px;
+                transition: border-color 0.3s;
+                width: 100%;
+            }
+            .form-item input:focus {
+                border-bottom: 2px solid #f16272;
+                outline: none;
+            }
+        </style>
+    {% endif %}
 </head>
 <body>
-  <h1>就活報告書管理システム</h1>
-    <div class="form-wrapper">
-      <h2>ログイン</h2>
-      <form method="post" action="/login">
+<h1>就活報告書管理システム</h1>
+<div class="form-wrapper">
+
+    <h2>ログイン</h2>
+{% if pgmsg %}
+    <p style="text-align: center;font-size: 0.9em; margin-bottom: 1em">{{ pgmsg }}</p>
+    {% endif %}
+    <form method="post" action="{{ url_for('common.login') }}">
         <div class="form-item">
-          <label for="email">学校メールアドレス</label>
-          <input type="email" name="email" required="required" placeholder="">
+            <label for="email">学校メールアドレス</label>
+            {% if errormsg %}
+                <input type="email" name="email" required="required" placeholder="" value="{{ mail }}">
+            {% else %}
+                <input type="email" name="email" required="required" placeholder="">
+            {% endif %}
         </div>
         <div class="form-item">
-          <label for="password">パスワード</label>
-          <input type="password" name="password" required="required" placeholder="">
+            <label for="password">パスワード</label>
+            {% if errormsg %}
+                <input type="password" name="password" required="required" placeholder="">
+            {% else %}
+                <input type="password" name="password" required="required" placeholder="">
+            {% endif %}
         </div>
         <div class="button-panel">
-          <input type="submit" class="button" title="Sign In" value="Sign In">
+            <input type="submit" class="button" title="Sign In" value="サインイン">
         </div>
-      </form>
-      <div class="form-footer">
-        <p><a href="#">パスワードを忘れた場合</a></p>
-      </div>
+        {% if errormsg %}
+            <p class="error_msg">{{ errormsg }}</p>
+        {% endif %}
+    </form>
+    <div class="form-footer">
+        <a href="{{ url_for('common.reset_password') }}">パスワードを忘れた場合</a>
     </div>
+</div>
 </body>
+
 </html>
