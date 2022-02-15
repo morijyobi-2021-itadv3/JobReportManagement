@@ -6,7 +6,7 @@ import os
 from model import db
 from model.hash import generate_random_alpha, sha256_text
 from model.send_mail import smtp_send_mail
-from model.user import user_login, is_exist_mail, get_token, find_reset_token, rechange_password, set_password
+from model.users import user_login, is_exist_mail, get_token, find_reset_token, rechange_password, set_password
 from flask import Flask, Blueprint, render_template
 from view.teacher import teacher_bp
 from model.db import get_connection
